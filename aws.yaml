@@ -1,0 +1,27 @@
+trigger:
+  branches:
+    include:
+      - master
+  paths:
+    include:
+      - aws/
+
+pr:
+  branches:
+    include:
+      - master
+  paths:
+    include:
+      - aws/
+
+variables:
+  - group: Defaults
+
+stages:
+  - template: templates/runway-terragrunt-live-infrastructure-v0.yaml@templates
+    parameters:
+      terraformVersion: '0.14.10'
+      terragruntStages:
+        test:
+          terragruntPath: aws/
+          variableGroupName: ado
